@@ -46,6 +46,26 @@ This notebook loads the model trained from the regression notebook
 and uses it along with user inputs to predict the listing price for
 a used vehicle.
 
+## Streamlit notebook
+
+To use the streamlit notebook.
+
 ### TODO: add the geo by state diagram
 
 - [ ] TODO; add streamlist version of inference if possible.
+
+## Dependencies
+
+- [ ] list all dependencies.
+
+- joblib
+- numpy
+- pandas
+- scikit-learn
+- xgboost
+- category_encoders
+- matplotlib
+- streamlit
+- watchdog (This is optional for streamlit)
+- 
+
