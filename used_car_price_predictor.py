@@ -28,25 +28,31 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from IPython.display import display
 
+
 def load_model(model_path):
     print(f"Loading model from {model_path}")
     model = joblib.load(model_path)
     return model
 
 
-# TODO: put in final model path
-model_path = 'model_xgboost_s_2023_03_13_07_53_37.pkl'
+preprocessor_path = 'model_preprocessor_f_2023_03_13_14_22_04.pkl'
+model_path = "model_xgboost_2023_03_13_16_35_43.pkl"
+
+sampled = False
+if sampled:
+    dataset_path = "craigslist_sampled_cleaned_2023_03_05_19_07_36.csv"
+else:  # Full dataset
+    dataset_path = "craigslist_full_cleaned_2023_03_12_10_45_22.csv"
+
 model = load_model(model_path)
 
 # load dataset
-# TODO: use full dataset.
-dataset_path = "craigslist_sampled_cleaned_2023_03_05_19_07_36.csv"
 target_col = 'price'
 
-orig_df = pd.read_csv(dataset_path)
-df = orig_df.copy()
+df = pd.read_csv(dataset_path)
+
 # show a sample for sanity check
-df.head()
+# df.head()
 
 # split into input data and output values
 X_all = df.drop(columns=[target_col])
@@ -81,7 +87,6 @@ numeric_cols = ['year', 'odometer']
 cat_cols = ['make', 'model', 'condition', 'cylinders', 'fuel', 'title_status',
             'transmission', 'drive', 'size', 'type', 'paint_color', 'state']
 
-preprocessor_path = 'model_preprocessor_s_2023_03_13_07_28_32.pkl'
 preprocess = load_model(preprocessor_path)
 
 
@@ -96,7 +101,6 @@ def xgboost_predict(X_test):
 
 
 predict_test = xgboost_predict(X_test)
-
 
 # NOTE: this is just a sanity check. Should not have test values for real life.
 print('RMSE of test data: ', mean_squared_error(y_test, predict_test) ** (0.5))
