@@ -11,8 +11,7 @@
   - Email: [rna63@drexel.edu](mailto:rna63@drexel.edu)
 
 
-# TODO:  thorough README document describing how your code runs and should be engaged.
-
+- [ ] TODO:  thorough README document describing how your code runs and should be engaged.
 
 ## Dataset
 
