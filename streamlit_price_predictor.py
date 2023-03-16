@@ -13,8 +13,11 @@
 #     - Name: Richard Anton
 #     - Email: [rna63@drexel.edu](mailto:rna63@drexel.edu)
 #     
+# Run this with python -mstreamlit run streamlit_price_predictor.py
+# after installing streamlit package with pip
 
 import joblib
+import pandas
 import xgboost as xgb
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
@@ -93,10 +96,68 @@ def run_sanity_check():
     st.write('R2 Score of test data:', r2)
 
 
+INPUT_COLUMNS= [
+    "year",
+    "make",
+    "model",
+    "condition",
+    "cylinders",
+    "fuel",
+    "odometer",
+    "title_status",
+    "transmission",
+    "drive",
+    "size",
+    "type",
+    "paint_color",
+    "state"
+    ]
+
+
+def make_input_df():
+    d = {cn: st.session_state.get(cn) for cn in INPUT_COLUMNS}
+    st.write(d)
+    df = pandas.DataFrame(data=d, index=[0])
+    return df
+
+
 if __name__ == "__main__":
     st.write("Used car price predictor")
+
+    # TODO: figure out how to cache this instead
+    # of running every time
+    # see  @st.cache_data
     preprocess = load_model(preprocessor_path)
     model = load_model(model_path)
     st.write("Model loaded")
     run_sanity_check()
 
+
+
+
+    st.text_input('Make', key='make')
+    st.text_input('Model', key='model')
+    # TODO: drop downs.
+    st.text_input('Condition', key='condition')
+    st.text_input('Cylinders', key='cylinders')
+    st.text_input('Fuel', key='fuel')
+    st.text_input('Title Status', key='title_status')
+    st.text_input('Transmission', key='transmission')
+    st.text_input('Drive', key='drive')
+    st.text_input('Size', key='size')
+    st.text_input('Type', key='type')
+    st.text_input('Paint Color', key='paint_color')
+    st.text_input('State', key='state')
+
+    # TODO; defaults
+    # TODO: integer
+    st.number_input('Year', key='year')
+    st.number_input('Mileage', key='odometer')
+
+    # show our data
+    #st.write("You entered:")
+    #values = [f"{k}={v}" for k, v in st.session_state.items()]
+    #st.write(values)
+
+    df = make_input_df()
+    st.write(df)
