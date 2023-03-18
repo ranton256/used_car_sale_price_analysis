@@ -113,6 +113,21 @@ INPUT_COLUMNS= [
     "state"
     ]
 
+CONDITIONS = ['good', 'excellent', 'fair', 'like new', 'new', 'salvage']
+CYLINDERS = ['8 cylinders', '6 cylinders', '4 cylinders', '5 cylinders',
+             'other', '3 cylinders', '10 cylinders', '12 cylinders']
+FUELS = ['gas', 'other', 'diesel', 'hybrid', 'electric']
+TITLE_STATUSES = ['clean', 'rebuilt', 'lien', 'salvage', 'missing', 'parts only']
+TRANSMISSIONS = ['other', 'automatic', 'manual']
+DRIVES = ['rwd', '4wd', 'fwd']
+SIZES = ['full-size', 'mid-size', 'compact', 'sub-compact']
+TYPES = ['pickup', 'truck', 'other', 'coupe', 'SUV', 'hatchback',
+         'mini-van', 'sedan', 'offroad']
+PAINT_COLORS = ['white', 'blue', 'red', 'black', 'silver', 'grey', 'brown',
+                'yellow', 'orange']
+
+
+# TODO: states
 
 def make_input_df():
     d = {cn: st.session_state.get(cn) for cn in INPUT_COLUMNS}
@@ -132,27 +147,23 @@ if __name__ == "__main__":
     st.write("Model loaded")
     run_sanity_check()
 
+    st.text_input('Make', key='make')  # TODO: put in select for model.
+    st.text_input('Model', key='model')  # free-form because unique values too high.
 
+    st.selectbox('Condition', CONDITIONS, key='condition')
+    st.selectbox('Cylinders', CYLINDERS, key='cylinders')
+    st.selectbox('Fuel', FUELS, key='fuel')
+    st.selectbox('Title Status', TITLE_STATUSES, key='title_status')
+    st.selectbox('Transmission', TRANSMISSIONS, key='transmission')
+    st.selectbox('Drive', DRIVES, key='drive')
+    st.selectbox('Size', SIZES, key='size')
+    st.selectbox('Type', TYPES, key='type')
+    st.selectbox('Paint Color', PAINT_COLORS, key='paint_color')
+    st.text_input('State', key='state')  # TODO: states
 
-
-    st.text_input('Make', key='make')
-    st.text_input('Model', key='model')
-    # TODO: drop downs.
-    st.text_input('Condition', key='condition')
-    st.text_input('Cylinders', key='cylinders')
-    st.text_input('Fuel', key='fuel')
-    st.text_input('Title Status', key='title_status')
-    st.text_input('Transmission', key='transmission')
-    st.text_input('Drive', key='drive')
-    st.text_input('Size', key='size')
-    st.text_input('Type', key='type')
-    st.text_input('Paint Color', key='paint_color')
-    st.text_input('State', key='state')
-
-    # TODO; defaults
-    # TODO: integer
-    st.number_input('Year', key='year')
-    st.number_input('Mileage', key='odometer')
+    # TODO: make these just integer somehow?
+    st.number_input('Year', key='year', min_value=1900, max_value=2025, format="%d")
+    st.number_input('Mileage', key='odometer', value=0, min_value=0, max_value=1000000, format="%d")
 
     # show our data
     #st.write("You entered:")
@@ -161,3 +172,7 @@ if __name__ == "__main__":
 
     df = make_input_df()
     st.write(df)
+
+    predicted = xgboost_predict(df)
+    st.write(f"Predicted price is {predicted}")
+
