@@ -44,11 +44,11 @@ It also saves the final XGBoost model file after training.
 
 This notebook loads the model trained from the regression notebook
 and uses it along with user inputs to predict the listing price for
-a used vehicle.
+a used vehicle. This is mainly for troubleshooting locally.
 
 ## Streamlit notebook
 
-To use the streamlit notebook.
+To run the streamlit notebook locally, if all the
 
 ### TODO: add the geo by state diagram
 
@@ -56,7 +56,7 @@ To use the streamlit notebook.
 
 ## Dependencies
 
-- [ ] list all dependencies.
+- The main dependencies for the notebooks and streamlist app include:
 
 - joblib
 - numpy
@@ -68,4 +68,10 @@ To use the streamlit notebook.
 - streamlit
 - watchdog (This is optional for streamlit)
 - s3fs (for streamlit to load model files)
+
+
+There is a 'requirements.txt' files that can be used with pip to install
+all of the dependencies into a virtualenv.
+
+
 
