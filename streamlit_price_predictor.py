@@ -31,12 +31,7 @@ import os
 
 preprocessor_path = 'model_preprocessor_f_2023_03_13_14_22_04.pkl'
 model_path = "model_xgboost_2023_03_13_16_35_43.pkl"
-
-sampled = False
-if sampled:
-    dataset_path = "craigslist_sampled_cleaned_2023_03_05_19_07_36.csv"
-else:  # Full dataset
-    dataset_path = "craigslist_full_cleaned_2023_03_12_10_45_22.csv"
+dataset_path = "craigslist_full_cleaned_2023_03_12_10_45_22.csv"
 
 target_col = 'price'
 
@@ -65,9 +60,26 @@ def xgboost_predict(X_test):
 
     return predict_test
 
+@st.cache_resource
+def load_test_data(ds_path, _fs=None):
 
-def load_test_data(ds_path):
-    df = pd.read_csv(ds_path)
+    if _fs is None:
+        df = pd.read_csv(ds_path)
+    else:
+        st.write("Loading test data from S3")
+        #AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+        #AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+        # AWS_SESSION_TOKEN = os.getenv("AWS_SESSION_TOKEN")
+
+        # Pandas supports using s3fs to read from S3.
+        df = pd.read_csv(
+            f"s3://{bucket_name}/{ds_path}",
+            # storage_options={
+            #     "key": AWS_ACCESS_KEY_ID,
+            #     "secret": AWS_SECRET_ACCESS_KEY,
+            #     #"token": AWS_SESSION_TOKEN,
+            # },
+        )
 
     # show a sample for sanity check
     # st.write(df.head())
@@ -244,6 +256,7 @@ if __name__ == "__main__":
     if "AWS_ACCESS_KEY_ID" not in os.environ:
         st.error("no access key!")
 
+    # NOTE: just set fs=None to use local files instead of S3.
     fs = s3fs.S3FileSystem(anon=False)
 
     preprocess = load_model(preprocessor_path, _fs=fs)
