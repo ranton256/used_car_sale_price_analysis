@@ -1,80 +1,51 @@
 aiobotocore==2.4.2
-aiohttp @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_4c_8pz93lf/croot/aiohttp_1670009562783/work
-aioitertools @ file:///tmp/build/80754af9/aioitertools_1607109665762/work
-aiosignal @ file:///tmp/build/80754af9/aiosignal_1637843061372/work
 altair==4.2.2
 appdirs==1.4.4
 appnope==0.1.3
 asttokens==2.2.1
-async-timeout @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_19fv27ehgp/croots/recipe/async-timeout_1664876371666/work
-attrs @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_978y9aqcd7/croot/attrs_1668696180911/work
 backcall==0.2.0
-beautifulsoup4 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_croot-15cbtalq/beautifulsoup4_1650462161715/work
-bleach @ file:///opt/conda/conda-bld/bleach_1641577558959/work
 blinker==1.5
 blis==0.7.9
-botocore @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_b1553gd808/croot/botocore_1667494015747/work
 brotlipy==0.7.0
 cachetools==5.3.0
 catalogue==2.0.8
 category-encoders==2.6.0
-certifi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_5d968ni_yn/croot/certifi_1671487774636/work/certifi
-cffi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_ab19r4bji3/croot/cffi_1670423206034/work
 charset-normalizer==2.1.1
 click==8.1.3
 comm==0.1.2
 confection==0.0.4
 contourpy==1.0.7
-cryptography @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_a9zjqvif1f/croot/cryptography_1677533099634/work
 cycler==0.11.0
 cymem==2.0.7
 debugpy==1.6.5
 decorator==5.1.1
-defusedxml @ file:///tmp/build/80754af9/defusedxml_1615228127516/work
 dicttoxml==1.7.16
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.5.0/en_core_web_sm-3.5.0-py3-none-any.whl
-entrypoints @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_croot-jb01gaox/entrypoints_1650293758411/work
 executing==1.2.0
-fastjsonschema @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_43a0jaiddu/croots/recipe/python-fastjsonschema_1661368628129/work
-flit_core @ file:///opt/conda/conda-bld/flit-core_1644941570762/work/source/flit_core
 fonttools==4.38.0
-frozenlist @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_38d0xkqt7k/croot/frozenlist_1670004509129/work
 fsspec==2023.3.0
 gender-guesser==0.4.0
 gitdb==4.0.10
 GitPython==3.1.31
-idna @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_771olrhiqw/croot/idna_1666125579282/work
 importlib-metadata==6.0.0
 ipykernel==6.20.1
 ipython==8.8.0
 jedi==0.18.2
-Jinja2 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_9fjgzv9ant/croot/jinja2_1666908141308/work
-jmespath @ file:///Users/ktietz/demo/mc3/conda-bld/jmespath_1630583964805/work
 joblib==1.2.0
-jsonschema @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_e5_l6coyjh/croots/recipe/jsonschema_1663375475589/work
 jupyter_client==7.4.9
 jupyter_core==5.1.3
-jupyterlab-pygments @ file:///tmp/build/80754af9/jupyterlab_pygments_1601490720602/work
 kiwisolver==1.4.4
 langcodes==3.3.0
-lxml @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_71bcfe2b-fe7b-414a-9d7e-4f32bdd95f6d2vxca0jd/croots/recipe/lxml_1657545136492/work
 markdown-it-py==2.2.0
 MarkupSafe==2.1.2
 matplotlib==3.6.3
 matplotlib-inline==0.1.6
 mdurl==0.1.2
-mistune @ file:///Users/ktietz/ci_310/mistune_1643966732634/work
-multidict @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_bd3x0mcjpv/croot/multidict_1665674237951/work
 murmurhash==1.0.9
-nbclient @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_croot-08wgx75f/nbclient_1650373566605/work
-nbconvert @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_36au3u9s44/croot/nbconvert_1668450648628/work
-nbformat @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_94781rq_cg/croot/nbformat_1670352348390/work
-nest-asyncio @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_6b_e0dr4lw/croot/nest-asyncio_1672387130036/work
 networkx==3.0
 numpy==1.24.1
 packaging==23.0
 pandas==1.5.2
-pandocfilters @ file:///opt/conda/conda-bld/pandocfilters_1643405455980/work
 parso==0.8.3
 pathy==0.10.1
 patsy==0.5.3
@@ -89,18 +60,13 @@ psutil==5.9.4
 ptyprocess==0.7.0
 pure-eval==0.2.2
 pyarrow==11.0.0
-pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
 pydantic==1.10.4
 pydeck==0.8.0
 pyee==8.2.2
 Pygments==2.14.0
 Pympler==1.0.1
-pyOpenSSL @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_38h4axtq38/croot/pyopenssl_1677607699670/work
 pyparsing==3.0.9
 pyppeteer==1.0.2
-pyrsistent @ file:///Users/ktietz/ci_310/pyrsistent_1643962172005/work
-PySocks @ file:///Users/ktietz/ci_310/pysocks_1643961536721/work
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
 pytz==2022.7.1
 pytz-deprecation-shim==0.1.0.post0
 pyzmq==25.0.0
@@ -112,10 +78,8 @@ scikit-learn==1.2.1
 scipy==1.10.0
 seaborn==0.12.2
 semver==2.13.0
-six @ file:///tmp/build/80754af9/six_1644875935023/work
 smart-open==6.3.0
 smmap==5.0.0
-soupsieve @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_d2jpk7eoyp/croot/soupsieve_1666296398381/work
 spacy==3.5.0
 spacy-legacy==3.0.12
 spacy-loggers==1.0.4
@@ -125,27 +89,21 @@ statsmodels==0.13.5
 streamlit==1.20.0
 thinc==8.1.7
 threadpoolctl==3.1.0
-tinycss2 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_fcw5_i306t/croot/tinycss2_1668168825117/work
 toml==0.10.2
 toolz==0.12.0
-tornado @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_a61b4xoie9/croots/recipe/tornado_1662061692951/work
 tqdm==4.64.1
 traitlets==5.8.1
 typer==0.7.0
-typing_extensions @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_10a8_u2ijw/croot/typing_extensions_1669923788997/work
 tzdata==2022.7
 tzlocal==4.2
-urllib3 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_8fvc4z_gis/croot/urllib3_1673575619550/work
 validators==0.20.0
 wasabi==1.1.1
 watchdog==2.3.1
 wcwidth==0.2.5
 webencodings==0.5.1
 websockets==10.4
-wrapt @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_37a5af2b-c563-4ec6-9258-35772bae6a6agcs4j3hx/croots/recipe/wrapt_1657814428573/work
 xgboost==1.7.4
 XlsxWriter==3.0.7
 xlwt==1.3.0
 xmltodict==0.13.0
-yarl @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_a5sx8bz_hq/croots/recipe/yarl_1661437083380/work
 zipp==3.12.0
