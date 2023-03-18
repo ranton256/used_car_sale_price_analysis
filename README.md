@@ -17,14 +17,6 @@ Craigslist: <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-d
 This dataset was created by the provider scraping data from Craigslist car listings.
 The columns include price, condition, manufacturer, and latitude/longitude plus 18 other categories.
 
-## Geospatial data
-
-TODO: remove this section if we don't use the data.
-
-The US State geo boundary data was obtained from:
-
-<https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html>
-
 ## Notebooks
 
 ### Data Preparation Notebook - rna63_project_part2.ipynb
@@ -51,7 +43,7 @@ There is a streamlit notebook which loads a saved model and allows
 the user to input vehicle data then predict the listing price using
 the trained model.
 
- TODO: Put in link to Streamlit app online.
+The app is also deployed online at <https://ranton256-used-car-sale-price--streamlit-price-predictor-tt183q.streamlit.app/>.
 
 ## Dependencies
 
@@ -130,8 +122,6 @@ The Jupyter notebook 'used_car_price_predictor.ipynb' contains code which loads 
 recreates the same train/test split, and then runs the test set through the model and outputs
 the same statistics as the training notebook.
 
-TODO: how to update model filenames.
-
 Update the cell that assigns the filenames for the preprocessor, models, and cleaned dataset
 to match the outputs from the other notebooks.
 
@@ -156,14 +146,14 @@ The app can be run locally with:
 
     python -mstreamlit run streamlit_price_predictor.py
 
-When run locally, if no environment variables containing S3 
-
-TODO: fix streamlit app to use local files when nothing in env.
+When run locally, if no environment variables containing AWS access key credentials are
+detected the application will look for the model and dataset files locally.
 
 The app is also deployed to a Streamlit community cloud app at <TODO: put in real URL>
 The deployed cloud app uses model files written to an S3 bucket since they are too large
 to check into the GitHub repository.
 
+You can use the app at <https://ranton256-used-car-sale-price--streamlit-price-predictor-tt183q.streamlit.app/>
 
 
 
@@ -171,3 +161,12 @@ to check into the GitHub repository.
 
 
 
+## References
+
+- Chen, T., He, T., Benesty, M., Khotilovich, V., Tang, Y., Cho, H., ... & Zhou, T. (2015). Xgboost: extreme gradient boosting. R package version 0.4-2, 1(4), 1-4.
+- Coefficient of determination. (Mar 2023). In _Wikipedia_. <https://en.wikipedia.org/wiki/Coefficient_of_determination>
+- Ho, T. K. (1995, August). Random decision forests. In Proceedings of 3rd international conference on document analysis and recognition (Vol. 1, pp. 278-282). IEEE.
+- Hoerl, A. E., & Kennard, R. W. (1970). Ridge regression: Biased estimation for nonorthogonal problems. Technometrics, 12(1), 55-67.
+- Reese, A., (2021). Used Cars Dataset: Vehicles listings from Craigslist.org, v10. Retrieved Jan 28, 2023 from https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data.
+- Scikit-learn: Machine Learning in Python, Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
+- Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society: Series B (Methodological), 58(1), 267-288.

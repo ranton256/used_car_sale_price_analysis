@@ -36,14 +36,17 @@ dataset_path = "craigslist_full_cleaned_2023_03_12_10_45_22.csv"
 target_col = 'price'
 
 bucket_name = 'used-car-price-predictor'
+preprocess = None
+model = None
 
 
 @st.cache_resource
 def load_model(model_path, _fs=None):
     if _fs is None:
-        print(f"Loading model from {model_path}")
+        st.write(f"Loading model {model_path} from local file")
         loaded = joblib.load(model_path)
     else:
+        st.write(f"Loading model {model_path} from S3")
         s3_path = bucket_name + '/' + model_path
         with _fs.open(s3_path) as f:
             loaded = joblib.load(f)
@@ -60,29 +63,18 @@ def xgboost_predict(X_test):
 
     return predict_test
 
+
 @st.cache_resource
 def load_test_data(ds_path, _fs=None):
-
     if _fs is None:
+        st.write("Loading test data from local file")
         df = pd.read_csv(ds_path)
     else:
         st.write("Loading test data from S3")
-        #AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-        #AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-        # AWS_SESSION_TOKEN = os.getenv("AWS_SESSION_TOKEN")
-
         # Pandas supports using s3fs to read from S3.
         df = pd.read_csv(
             f"s3://{bucket_name}/{ds_path}",
-            # storage_options={
-            #     "key": AWS_ACCESS_KEY_ID,
-            #     "secret": AWS_SECRET_ACCESS_KEY,
-            #     #"token": AWS_SESSION_TOKEN,
-            # },
         )
-
-    # show a sample for sanity check
-    # st.write(df.head())
 
     # split into input data and output values
     X_all = df.drop(columns=[target_col])
@@ -118,7 +110,7 @@ def run_sanity_check(_fs):
     return predict_test
 
 
-INPUT_COLUMNS= [
+INPUT_COLUMNS = [
     "year",
     "make",
     "model",
@@ -133,7 +125,7 @@ INPUT_COLUMNS= [
     "type",
     "paint_color",
     "state"
-    ]
+]
 
 CONDITIONS = ['good', 'excellent', 'fair', 'like new', 'new', 'salvage']
 CYLINDERS = ['8 cylinders', '6 cylinders', '4 cylinders', '5 cylinders',
@@ -150,59 +142,59 @@ PAINT_COLORS = ['white', 'blue', 'red', 'black', 'silver', 'grey', 'brown',
 
 
 def get_states():
-    columns = ["state","abbrev","code"]
+    columns = ["state", "abbrev", "code"]
     state_data = [
-        ["Alabama","Ala.","AL"],
-        ["Alaska","Alaska","AK"],
-        ["Arizona","Ariz.","AZ"],
-        ["Arkansas","Ark.","AR"],
-        ["California","Calif.","CA"],
-        ["Colorado","Colo.","CO"],
-        ["Connecticut","Conn.","CT"],
-        ["Delaware","Del.","DE"],
-        ["District of Columbia","D.C.","DC"],
-        ["Florida","Fla.","FL"],
-        ["Georgia","Ga.","GA"],
-        ["Hawaii","Hawaii","HI"],
-        ["Idaho","Idaho","ID"],
-        ["Illinois","Ill.","IL"],
-        ["Indiana","Ind.","IN"],
-        ["Iowa","Iowa","IA"],
-        ["Kansas","Kans.","KS"],
-        ["Kentucky","Ky.","KY"],
-        ["Louisiana","La.","LA"],
-        ["Maine","Maine","ME"],
-        ["Maryland","Md.","MD"],
-        ["Massachusetts","Mass.","MA"],
-        ["Michigan","Mich.","MI"],
-        ["Minnesota","Minn.","MN"],
-        ["Mississippi","Miss.","MS"],
-        ["Missouri","Mo.","MO"],
-        ["Montana","Mont.","MT"],
-        ["Nebraska","Nebr.","NE"],
-        ["Nevada","Nev.","NV"],
-        ["New Hampshire","N.H.","NH"],
-        ["New Jersey","N.J.","NJ"],
-        ["New Mexico","N.M.","NM"],
-        ["New York","N.Y.","NY"],
-        ["North Carolina","N.C.","NC"],
-        ["North Dakota","N.D.","ND"],
-        ["Ohio","Ohio","OH"],
-        ["Oklahoma","Okla.","OK"],
-        ["Oregon","Ore.","OR"],
-        ["Pennsylvania","Pa.","PA"],
-        ["Rhode Island","R.I.","RI"],
-        ["South Carolina","S.C.","SC"],
-        ["South Dakota","S.D.","SD"],
-        ["Tennessee","Tenn.","TN"],
-        ["Texas","Tex.","TX"],
-        ["Utah","Utah","UT"],
-        ["Vermont","Vt.","VT"],
-        ["Virginia","Va.","VA"],
-        ["Washington","Wash.","WA"],
-        ["West Virginia","W.Va.","WV"],
-        ["Wisconsin","Wis.","WI"],
-        ["Wyoming","Wyo.","WY"]
+        ["Alabama", "Ala.", "AL"],
+        ["Alaska", "Alaska", "AK"],
+        ["Arizona", "Ariz.", "AZ"],
+        ["Arkansas", "Ark.", "AR"],
+        ["California", "Calif.", "CA"],
+        ["Colorado", "Colo.", "CO"],
+        ["Connecticut", "Conn.", "CT"],
+        ["Delaware", "Del.", "DE"],
+        ["District of Columbia", "D.C.", "DC"],
+        ["Florida", "Fla.", "FL"],
+        ["Georgia", "Ga.", "GA"],
+        ["Hawaii", "Hawaii", "HI"],
+        ["Idaho", "Idaho", "ID"],
+        ["Illinois", "Ill.", "IL"],
+        ["Indiana", "Ind.", "IN"],
+        ["Iowa", "Iowa", "IA"],
+        ["Kansas", "Kans.", "KS"],
+        ["Kentucky", "Ky.", "KY"],
+        ["Louisiana", "La.", "LA"],
+        ["Maine", "Maine", "ME"],
+        ["Maryland", "Md.", "MD"],
+        ["Massachusetts", "Mass.", "MA"],
+        ["Michigan", "Mich.", "MI"],
+        ["Minnesota", "Minn.", "MN"],
+        ["Mississippi", "Miss.", "MS"],
+        ["Missouri", "Mo.", "MO"],
+        ["Montana", "Mont.", "MT"],
+        ["Nebraska", "Nebr.", "NE"],
+        ["Nevada", "Nev.", "NV"],
+        ["New Hampshire", "N.H.", "NH"],
+        ["New Jersey", "N.J.", "NJ"],
+        ["New Mexico", "N.M.", "NM"],
+        ["New York", "N.Y.", "NY"],
+        ["North Carolina", "N.C.", "NC"],
+        ["North Dakota", "N.D.", "ND"],
+        ["Ohio", "Ohio", "OH"],
+        ["Oklahoma", "Okla.", "OK"],
+        ["Oregon", "Ore.", "OR"],
+        ["Pennsylvania", "Pa.", "PA"],
+        ["Rhode Island", "R.I.", "RI"],
+        ["South Carolina", "S.C.", "SC"],
+        ["South Dakota", "S.D.", "SD"],
+        ["Tennessee", "Tenn.", "TN"],
+        ["Texas", "Tex.", "TX"],
+        ["Utah", "Utah", "UT"],
+        ["Vermont", "Vt.", "VT"],
+        ["Virginia", "Va.", "VA"],
+        ["Washington", "Wash.", "WA"],
+        ["West Virginia", "W.Va.", "WV"],
+        ["Wisconsin", "Wis.", "WI"],
+        ["Wyoming", "Wyo.", "WY"]
     ]
     states_df = pd.DataFrame(data=state_data, columns=columns)
     return states_df
@@ -216,7 +208,6 @@ def make_input_df():
 
 
 def setup_controls():
-
     states = get_states()
     state_codes = states['code'].values.tolist()
 
@@ -242,7 +233,9 @@ def setup_controls():
         st.number_input('Mileage', key='odometer', value=100000, min_value=0, max_value=1000000, format="%d")
 
 
-if __name__ == "__main__":
+def main():
+    global preprocess, model
+
     st.title("Used Car Price Predictor")
     col1, col2, col3 = st.columns(3)
 
@@ -255,9 +248,9 @@ if __name__ == "__main__":
 
     if "AWS_ACCESS_KEY_ID" not in os.environ:
         st.error("no access key!")
-
-    # NOTE: just set fs=None to use local files instead of S3.
-    fs = s3fs.S3FileSystem(anon=False)
+        fs = None
+    else:
+        fs = s3fs.S3FileSystem(anon=False)
 
     preprocess = load_model(preprocessor_path, _fs=fs)
     model = load_model(model_path, _fs=fs)
@@ -278,3 +271,6 @@ if __name__ == "__main__":
 
     st.subheader("${price:.2f}".format(price=predicted))
 
+
+if __name__ == "__main__":
+    main()
