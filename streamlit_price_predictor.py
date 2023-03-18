@@ -99,10 +99,10 @@ def load_test_data(ds_path, _fs=None):
 
 
 @st.cache_data
-def run_sanity_check():
+def run_sanity_check(_fs):
     st.write("Running sanity check on model")
 
-    X_all, y_all = load_test_data(dataset_path)
+    X_all, y_all = load_test_data(dataset_path, _fs=_fs)
 
     # It's important that the random_state matches the other notebook.
     # just keep test data
@@ -264,7 +264,7 @@ if __name__ == "__main__":
     st.write("Model loaded")
 
     with st.expander("Sanity Check"):
-        run_sanity_check()
+        run_sanity_check(_fs=fs)
 
     st.header("Enter vehicle data")
     setup_controls()
