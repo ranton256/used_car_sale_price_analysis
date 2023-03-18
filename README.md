@@ -67,5 +67,5 @@ To use the streamlit notebook.
 - matplotlib
 - streamlit
 - watchdog (This is optional for streamlit)
-- 
+- s3fs (for streamlit to load model files)
 

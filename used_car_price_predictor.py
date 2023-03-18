@@ -28,7 +28,6 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from IPython.display import display
 
-
 def load_model(model_path):
     print(f"Loading model from {model_path}")
     model = joblib.load(model_path)

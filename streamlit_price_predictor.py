@@ -26,6 +26,9 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
+import s3fs
+import os
+
 preprocessor_path = 'model_preprocessor_f_2023_03_13_14_22_04.pkl'
 model_path = "model_xgboost_2023_03_13_16_35_43.pkl"
 
@@ -37,17 +40,20 @@ else:  # Full dataset
 
 target_col = 'price'
 
-# numeric_cols = ['year', 'odometer']
-# cat_cols = ['make', 'model', 'condition', 'cylinders', 'fuel', 'title_status',
-#             'transmission', 'drive', 'size', 'type', 'paint_color', 'state']
+bucket_name = 'used-car-price-predictor'
 
 
 @st.cache_resource
-def load_model(model_path):
-    print(f"Loading model from {model_path}")
-    model = joblib.load(model_path)
-    return model
+def load_model(model_path, _fs=None):
+    if _fs is None:
+        print(f"Loading model from {model_path}")
+        loaded = joblib.load(model_path)
+    else:
+        s3_path = bucket_name + '/' + model_path
+        with _fs.open(s3_path) as f:
+            loaded = joblib.load(f)
 
+    return loaded
 
 
 def xgboost_predict(X_test):
@@ -235,8 +241,13 @@ if __name__ == "__main__":
     with col3:
         st.subheader("rna63@drexel.edu")
 
-    preprocess = load_model(preprocessor_path)
-    model = load_model(model_path)
+    if "AWS_ACCESS_KEY_ID" not in os.environ:
+        st.error("no access key!")
+
+    fs = s3fs.S3FileSystem(anon=False)
+
+    preprocess = load_model(preprocessor_path, _fs=fs)
+    model = load_model(model_path, _fs=fs)
     st.write("Model loaded")
 
     with st.expander("Sanity Check"):
