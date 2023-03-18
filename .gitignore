@@ -2,4 +2,6 @@
 datasets/
 secrets.toml
 prod_model/
-oldmodel/
+craigslist_*.csv
+oldmodels/
+~*.pptx
