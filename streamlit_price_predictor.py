@@ -131,7 +131,64 @@ PAINT_COLORS = ['white', 'blue', 'red', 'black', 'silver', 'grey', 'brown',
                 'yellow', 'orange']
 
 
-# TODO: states
+def get_states():
+    columns = ["state","abbrev","code"]
+    state_data = [
+        ["Alabama","Ala.","AL"],
+        ["Alaska","Alaska","AK"],
+        ["Arizona","Ariz.","AZ"],
+        ["Arkansas","Ark.","AR"],
+        ["California","Calif.","CA"],
+        ["Colorado","Colo.","CO"],
+        ["Connecticut","Conn.","CT"],
+        ["Delaware","Del.","DE"],
+        ["District of Columbia","D.C.","DC"],
+        ["Florida","Fla.","FL"],
+        ["Georgia","Ga.","GA"],
+        ["Hawaii","Hawaii","HI"],
+        ["Idaho","Idaho","ID"],
+        ["Illinois","Ill.","IL"],
+        ["Indiana","Ind.","IN"],
+        ["Iowa","Iowa","IA"],
+        ["Kansas","Kans.","KS"],
+        ["Kentucky","Ky.","KY"],
+        ["Louisiana","La.","LA"],
+        ["Maine","Maine","ME"],
+        ["Maryland","Md.","MD"],
+        ["Massachusetts","Mass.","MA"],
+        ["Michigan","Mich.","MI"],
+        ["Minnesota","Minn.","MN"],
+        ["Mississippi","Miss.","MS"],
+        ["Missouri","Mo.","MO"],
+        ["Montana","Mont.","MT"],
+        ["Nebraska","Nebr.","NE"],
+        ["Nevada","Nev.","NV"],
+        ["New Hampshire","N.H.","NH"],
+        ["New Jersey","N.J.","NJ"],
+        ["New Mexico","N.M.","NM"],
+        ["New York","N.Y.","NY"],
+        ["North Carolina","N.C.","NC"],
+        ["North Dakota","N.D.","ND"],
+        ["Ohio","Ohio","OH"],
+        ["Oklahoma","Okla.","OK"],
+        ["Oregon","Ore.","OR"],
+        ["Pennsylvania","Pa.","PA"],
+        ["Rhode Island","R.I.","RI"],
+        ["South Carolina","S.C.","SC"],
+        ["South Dakota","S.D.","SD"],
+        ["Tennessee","Tenn.","TN"],
+        ["Texas","Tex.","TX"],
+        ["Utah","Utah","UT"],
+        ["Vermont","Vt.","VT"],
+        ["Virginia","Va.","VA"],
+        ["Washington","Wash.","WA"],
+        ["West Virginia","W.Va.","WV"],
+        ["Wisconsin","Wis.","WI"],
+        ["Wyoming","Wyo.","WY"]
+    ]
+    states_df = pd.DataFrame(data=state_data, columns=columns)
+    return states_df
+
 
 def make_input_df():
     d = {cn: st.session_state.get(cn) for cn in INPUT_COLUMNS}
@@ -142,47 +199,58 @@ def make_input_df():
 
 def setup_controls():
 
-    col1, col2 = st.columns(2)
+    states = get_states()
+    state_codes = states['code'].values.tolist()
 
+    col1, col2 = st.columns(2)
     with col1:
         st.text_input('Make', key='make')  # TODO: put in select for make.
         st.text_input('Model', key='model')  # free-form because unique values too high.
         st.selectbox('Condition', CONDITIONS, key='condition')
         st.selectbox('Cylinders', CYLINDERS, key='cylinders')
         st.selectbox('Fuel', FUELS, key='fuel')
-        st.selectbox('Title Status', TITLE_STATUSES, key='title_status')
-        st.selectbox('Transmission', TRANSMISSIONS, key='transmission')
+        st.selectbox('Title Status', TITLE_STATUSES, key='title_status',
+                     index=TITLE_STATUSES.index("clean"))
+        st.selectbox('Transmission', TRANSMISSIONS, key='transmission',
+                     index=TRANSMISSIONS.index("automatic"))
 
     with col2:
-        st.selectbox('Drive', DRIVES, key='drive')
-        st.selectbox('Size', SIZES, key='size')
-        st.selectbox('Type', TYPES, key='type')
+        st.selectbox('Drive', DRIVES, key='drive', index=DRIVES.index('fwd'))
+        st.selectbox('Size', SIZES, key='size', index=SIZES.index('mid-size'))
+        st.selectbox('Type', TYPES, key='type', index=TYPES.index('sedan'))
         st.selectbox('Paint Color', PAINT_COLORS, key='paint_color')
-        st.text_input('State', key='state')  # TODO: states
-        st.number_input('Year', key='year', min_value=1900, max_value=2025, format="%d")
-        st.number_input('Mileage', key='odometer', value=0, min_value=0, max_value=1000000, format="%d")
+        st.selectbox('State', state_codes, key='state')
+        st.number_input('Year', key='year', min_value=1900, max_value=2025, format="%d", value=2020)
+        st.number_input('Mileage', key='odometer', value=100000, min_value=0, max_value=1000000, format="%d")
 
 
 if __name__ == "__main__":
-    st.title("Used car price predictor")
+    st.title("Used Car Price Predictor")
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.subheader("Drexel DSCI 521")
+    with col2:
+        st.subheader("Richard Anton")
+    with col3:
+        st.subheader("rna63@drexel.edu")
 
     preprocess = load_model(preprocessor_path)
     model = load_model(model_path)
-
-
     st.write("Model loaded")
 
-    st.header("Sanity Check")
-    run_sanity_check()
+    with st.expander("Sanity Check"):
+        run_sanity_check()
 
     st.header("Enter vehicle data")
     setup_controls()
 
-    df = make_input_df()
-    st.write(df)
+    with st.expander("Your Inputs"):
+        df = make_input_df()
 
     st.header("Predicted price")
-    predicted = xgboost_predict(df)
-    # TODO: predicted as scalar
-    st.write(f"${predicted}")
+    results = xgboost_predict(df)
+    predicted = results[0]
+
+    st.subheader("${price:.2f}".format(price=predicted))
 
