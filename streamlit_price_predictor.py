@@ -140,39 +140,49 @@ def make_input_df():
     return df
 
 
-if __name__ == "__main__":
-    st.write("Used car price predictor")
+def setup_controls():
 
-    # TODO: figure out how to cache this instead
-    # of running every time
-    # @st.cache_data()
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.text_input('Make', key='make')  # TODO: put in select for make.
+        st.text_input('Model', key='model')  # free-form because unique values too high.
+        st.selectbox('Condition', CONDITIONS, key='condition')
+        st.selectbox('Cylinders', CYLINDERS, key='cylinders')
+        st.selectbox('Fuel', FUELS, key='fuel')
+        st.selectbox('Title Status', TITLE_STATUSES, key='title_status')
+        st.selectbox('Transmission', TRANSMISSIONS, key='transmission')
+
+    with col2:
+        st.selectbox('Drive', DRIVES, key='drive')
+        st.selectbox('Size', SIZES, key='size')
+        st.selectbox('Type', TYPES, key='type')
+        st.selectbox('Paint Color', PAINT_COLORS, key='paint_color')
+        st.text_input('State', key='state')  # TODO: states
+        st.number_input('Year', key='year', min_value=1900, max_value=2025, format="%d")
+        st.number_input('Mileage', key='odometer', value=0, min_value=0, max_value=1000000, format="%d")
+
+
+if __name__ == "__main__":
+    st.title("Used car price predictor")
+
     preprocess = load_model(preprocessor_path)
     model = load_model(model_path)
 
+
     st.write("Model loaded")
 
+    st.header("Sanity Check")
     run_sanity_check()
 
-    st.text_input('Make', key='make')  # TODO: put in select for model.
-    st.text_input('Model', key='model')  # free-form because unique values too high.
-
-    st.selectbox('Condition', CONDITIONS, key='condition')
-    st.selectbox('Cylinders', CYLINDERS, key='cylinders')
-    st.selectbox('Fuel', FUELS, key='fuel')
-    st.selectbox('Title Status', TITLE_STATUSES, key='title_status')
-    st.selectbox('Transmission', TRANSMISSIONS, key='transmission')
-    st.selectbox('Drive', DRIVES, key='drive')
-    st.selectbox('Size', SIZES, key='size')
-    st.selectbox('Type', TYPES, key='type')
-    st.selectbox('Paint Color', PAINT_COLORS, key='paint_color')
-    st.text_input('State', key='state')  # TODO: states
-
-    st.number_input('Year', key='year', min_value=1900, max_value=2025, format="%d")
-    st.number_input('Mileage', key='odometer', value=0, min_value=0, max_value=1000000, format="%d")
+    st.header("Enter vehicle data")
+    setup_controls()
 
     df = make_input_df()
     st.write(df)
 
+    st.header("Predicted price")
     predicted = xgboost_predict(df)
-    st.write(f"Predicted price is {predicted}")
+    # TODO: predicted as scalar
+    st.write(f"${predicted}")
 
