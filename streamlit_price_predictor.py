@@ -42,6 +42,7 @@ target_col = 'price'
 #             'transmission', 'drive', 'size', 'type', 'paint_color', 'state']
 
 
+@st.cache_resource
 def load_model(model_path):
     print(f"Loading model from {model_path}")
     model = joblib.load(model_path)
@@ -79,6 +80,7 @@ def load_test_data(ds_path):
     return X_all, y_all
 
 
+@st.cache_data
 def run_sanity_check():
     st.write("Running sanity check on model")
 
@@ -94,6 +96,8 @@ def run_sanity_check():
     st.write('RMSE of test data: ', mean_squared_error(y_test, predict_test) ** (0.5))
     r2 = r2_score(y_test, predict_test)
     st.write('R2 Score of test data:', r2)
+
+    return predict_test
 
 
 INPUT_COLUMNS= [
@@ -141,10 +145,12 @@ if __name__ == "__main__":
 
     # TODO: figure out how to cache this instead
     # of running every time
-    # see  @st.cache_data
+    # @st.cache_data()
     preprocess = load_model(preprocessor_path)
     model = load_model(model_path)
+
     st.write("Model loaded")
+
     run_sanity_check()
 
     st.text_input('Make', key='make')  # TODO: put in select for model.
@@ -161,14 +167,8 @@ if __name__ == "__main__":
     st.selectbox('Paint Color', PAINT_COLORS, key='paint_color')
     st.text_input('State', key='state')  # TODO: states
 
-    # TODO: make these just integer somehow?
     st.number_input('Year', key='year', min_value=1900, max_value=2025, format="%d")
     st.number_input('Mileage', key='odometer', value=0, min_value=0, max_value=1000000, format="%d")
-
-    # show our data
-    #st.write("You entered:")
-    #values = [f"{k}={v}" for k, v in st.session_state.items()]
-    #st.write(values)
 
     df = make_input_df()
     st.write(df)
