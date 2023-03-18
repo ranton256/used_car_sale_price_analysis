@@ -132,6 +132,14 @@ the same statistics as the training notebook.
 
 TODO: how to update model filenames.
 
+Update the cell that assigns the filenames for the preprocessor, models, and cleaned dataset
+to match the outputs from the other notebooks.
+
+The cell should look something like this:
+
+    preprocessor_path = 'model_preprocessor_f_2023_03_13_14_22_04.pkl'
+    model_path = "model_xgboost_2023_03_13_16_35_43.pkl"
+    dataset_path = "craigslist_full_cleaned_2023_03_12_10_45_22.csv"
 
 This is just a demonstration of how to load and use the saved model, and a sanity check that
 it produces the same results as the training notebook on the same data.
@@ -141,7 +149,8 @@ it produces the same results as the training notebook on the same data.
 The Streamlit app contained in 'streamlit_price_predictor.py' allows entering the input 
 values in a web interface and generating a predicted price using the saved model.
 
-TODO: update to use model filenames.
+Update the assigned values for the preprocessor_path, model_path, and dataset_path values as you did
+for the 'used_car_price_predictor.ipynb' notebook.
 
 The app can be run locally with:
 
