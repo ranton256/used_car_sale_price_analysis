@@ -10,11 +10,19 @@
   - Name: Richard Anton
   - Email: [rna63@drexel.edu](mailto:rna63@drexel.edu)
 
+## Project Overview
+
+This project explores the influence of different features on the listing price of used cars,
+and examines the efficacy of multiple machine learning regression models for predicting
+the vehicle price. The trained model is used in a web application which can interactively
+return a price based on vehicle data input by the user.
+
 ## Dataset
 
-Craigslist: <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>
+We located and considered various datasets. This dataset chosen was based on data from Craigslist used car sales listings.
 
-This dataset was created by the provider scraping data from Craigslist car listings.
+The dataset is available on Kaggle at <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>
+
 The columns include price, condition, manufacturer, and latitude/longitude plus 18 other categories.
 
 ## Notebooks
@@ -37,7 +45,7 @@ This notebook loads the model trained from the regression notebook
 and uses it along with user inputs to predict the listing price for
 a used vehicle. This is mainly for troubleshooting locally.
 
-## Streamlit notebook - streamlit_price_predictor.py 
+## Streamlit notebook - streamlit_price_predictor.py
 
 There is a streamlit notebook which loads a saved model and allows
 the user to input vehicle data then predict the listing price using
@@ -60,10 +68,8 @@ The app is also deployed online at <https://ranton256-used-car-sale-price--strea
 - watchdog (This is optional for streamlit)
 - s3fs (for Streamlit to load model files)
 
-
 There is a 'requirements.txt' files that can be used with pip to install
-all the dependencies into a virtualenv 
-
+all the dependencies into a virtualenv
 
 ## Setup
 
@@ -85,10 +91,9 @@ all the dependencies into a virtualenv
 6. [ ] Start the jupyter notebook server.
    1. 'jupyter notebook rna63_project_part2.ipynb'
 
-
 ## Data Preparation
 
-Use the 'rna63_project_part2.ipynb' Jupyter notebook to load the dataset, plot various graphs and 
+Use the 'rna63_project_part2.ipynb' Jupyter notebook to load the dataset, plot various graphs and
 statistics used for the exploratory data analysis, and output the cleaned data to a new CSV file.
 
 Run all the cells in the notebook.
@@ -123,7 +128,7 @@ actual XGBoost model.  There should be cell outputs similar containing text simi
     ...
     Saving model to model_xgboost_2023_03_13_16_35_43.pkl
 
-## Price Prediction Using Trained Model.
+## Price Prediction Using Trained Model
 
 The Jupyter notebook 'used_car_price_predictor.ipynb' contains code which loads the saved model,
 recreates the same train/test split, and then runs the test set through the model and outputs
@@ -143,7 +148,7 @@ it produces the same results as the training notebook on the same data.
 
 ## Interactive Price Prediction Using Streamlit App
 
-The Streamlit app contained in 'streamlit_price_predictor.py' allows entering the input 
+The Streamlit app contained in 'streamlit_price_predictor.py' allows entering the input
 values in a web interface and generating a predicted price using the saved model.
 
 Update the assigned values for the preprocessor_path, model_path, and dataset_path values as you did
@@ -162,13 +167,12 @@ The deployed cloud app uses model files written to an S3 bucket since they are t
 
 You can use the app at <https://ranton256-used-car-sale-price--streamlit-price-predictor-tt183q.streamlit.app/>
 
-
 ## References
 
 - Chen, T., He, T., Benesty, M., Khotilovich, V., Tang, Y., Cho, H., ... & Zhou, T. (2015). Xgboost: extreme gradient boosting. R package version 0.4-2, 1(4), 1-4.
 - Coefficient of determination. (Mar 2023). In _Wikipedia_. <https://en.wikipedia.org/wiki/Coefficient_of_determination>
 - Ho, T. K. (1995, August). Random decision forests. In Proceedings of 3rd international conference on document analysis and recognition (Vol. 1, pp. 278-282). IEEE.
 - Hoerl, A. E., & Kennard, R. W. (1970). Ridge regression: Biased estimation for nonorthogonal problems. Technometrics, 12(1), 55-67.
-- Reese, A., (2021). Used Cars Dataset: Vehicles listings from Craigslist.org, v10. Retrieved Jan 28, 2023 from https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data.
+- Reese, A., (2021). Used Cars Dataset: Vehicles listings from Craigslist.org, v10. Retrieved Jan 28, 2023 from <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>.
 - Scikit-learn: Machine Learning in Python, Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
 - Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society: Series B (Methodological), 58(1), 267-288.
