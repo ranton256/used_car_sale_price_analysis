@@ -77,18 +77,14 @@ all the dependencies into a virtualenv
    1. You can create a new virtualenv with 'python -mvenv .venv' or use Conda/Miniconda
    2. activate the environment: on Mac/Linux run 'source .venv/bin/activate'
    3. Run 'pip install -r requirements.txt' from the unzipped project directory.
-2. [ ] Install Jupyter notebook extensions.
-   1. 'pip install jupyter_contrib_nbextensions'
-   2. 'jupyter contrib nbextension install --user'
-   3. 'jupyter nbextension enable varInspector/main'
-3. [ ] Download dataset from <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>
+2. [ ] Download dataset from <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>
    1. unzip the archive.zip file into the project directory.
-4. [ ] Create the datasets/craigslist directory
+3. [ ] Create the datasets/craigslist directory
    1. In the same directory as the Jupyter notebook files:
       1. 'mkdir -p datasets/craigslist'
-5. [ ] Move the vehicles.csv file from the zip file to the datasets/craigslist directory
+4. [ ] Move the vehicles.csv file from the zip file to the datasets/craigslist directory
    1. 'mv vehicles.csv datasets/craigslist'
-6. [ ] Start the jupyter notebook server.
+5. [ ] Start the jupyter notebook server.
    1. 'jupyter notebook rna63_project_part2.ipynb'
 
 ## Data Preparation
