@@ -71,13 +71,20 @@ all the dependencies into a virtualenv
    1. You can create a new virtualenv with 'python -mvenv .venv' or use Conda/Miniconda
    2. activate the environment: on Mac/Linux run 'source .venv/bin/activate'
    3. Run 'pip install -r requirements.txt' from the unzipped project directory.
-2. [ ] Download dataset from <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>
-  - then unzip the archive.zip file.
-3. [ ] Create the datasets/craigslist directory 
-   1. In the same directory as the Jupyter notebook files
-   2. 'mkdir -p datasets/craigslist'
-4. [ ] Move the vehicles.csv file from the zip file to the datasets/craigslist directory
+2. [ ] Install Jupyter notebook extensions.
+   1. 'pip install jupyter_contrib_nbextensions'
+   2. 'jupyter contrib nbextension install --user'
+   3. 'jupyter nbextension enable varInspector/main'
+3. [ ] Download dataset from <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>
+   1. unzip the archive.zip file into the project directory.
+4. [ ] Create the datasets/craigslist directory
+   1. In the same directory as the Jupyter notebook files:
+      1. 'mkdir -p datasets/craigslist'
+5. [ ] Move the vehicles.csv file from the zip file to the datasets/craigslist directory
    1. 'mv vehicles.csv datasets/craigslist'
+6. [ ] Start the jupyter notebook server.
+   1. 'jupyter notebook rna63_project_part2.ipynb'
+
 
 ## Data Preparation
 
@@ -103,7 +110,6 @@ by the 'rna63_project_part2.ipynb'.
         dataset_path = "craigslist_sampled_cleaned_2023_03_05_19_07_36.csv"
     else:  # Full dataset
         dataset_path = "craigslist_full_cleaned_2023_03_12_10_45_22.csv"
-    
 
 Run all the cells in the notebook.
 
@@ -150,16 +156,11 @@ The app can be run locally with:
 When run locally, if no environment variables containing AWS access key credentials are
 detected the application will look for the model and dataset files locally.
 
-The app is also deployed to a Streamlit community cloud app at <TODO: put in real URL>
-The deployed cloud app uses model files written to an S3 bucket since they are too large
-to check into the GitHub repository.
+The app is also deployed to a Streamlit community cloud app.
+
+The deployed cloud app uses model files written to an S3 bucket since they are too large to check into the GitHub repository.
 
 You can use the app at <https://ranton256-used-car-sale-price--streamlit-price-predictor-tt183q.streamlit.app/>
-
-
-
-
-
 
 
 ## References

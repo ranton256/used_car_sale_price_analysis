@@ -213,7 +213,7 @@ def setup_controls():
 
     col1, col2 = st.columns(2)
     with col1:
-        st.text_input('Make', key='make')  # TODO: put in select for make.
+        st.text_input('Make', key='make')  # free-form because training data not comprehensive for makes.
         st.text_input('Model', key='model')  # free-form because unique values too high.
         st.selectbox('Condition', CONDITIONS, key='condition')
         st.selectbox('Cylinders', CYLINDERS, key='cylinders')
