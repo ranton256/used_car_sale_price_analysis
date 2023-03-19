@@ -5,3 +5,5 @@ prod_model/
 craigslist_*.csv
 oldmodels/
 ~*.pptx
+rna63_DSCI5210_project.zip
+*.pkl

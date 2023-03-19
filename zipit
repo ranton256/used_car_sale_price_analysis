@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SRCDIR=./
+ZIPNAME=rna63_DSCI5210_project
+
+FILES="rna63_project_part2.ipynb used_car_price_predictor.ipynb used_car_price_regression.ipynb streamlit_price_predictor.py README.md"
+
+
+rm -f "$ZIPNAME.zip"
+
+echo "Creating zip at $ZIPNAME.zip"
+for F in $FILES; do
+    echo $F
+    # add the file to the archive
+    zip $ZIPNAME $F
+done
+
+
