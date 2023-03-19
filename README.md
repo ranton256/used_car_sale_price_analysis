@@ -69,7 +69,8 @@ all the dependencies into a virtualenv
 
 1. [ ] Install Python package dependencies into your environment.
    1. You can create a new virtualenv with 'python -mvenv .venv' or use Conda/Miniconda
-   2. Run 'pip install -r requirements.txt' from the unzipped project directory.
+   2. activate the environment: on Mac/Linux run 'source .venv/bin/activate'
+   3. Run 'pip install -r requirements.txt' from the unzipped project directory.
 2. [ ] Download dataset from <https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data>
   - then unzip the archive.zip file.
 3. [ ] Create the datasets/craigslist directory 

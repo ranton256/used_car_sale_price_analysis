@@ -1,18 +1,22 @@
 #!/bin/bash
 
 SRCDIR=./
-ZIPNAME=rna63_DSCI5210_project
-
-FILES="rna63_project_part2.ipynb used_car_price_predictor.ipynb used_car_price_regression.ipynb streamlit_price_predictor.py README.md"
+FOLDER=rna63_DSCI521_project
+ZIPNAME=$FOLDER
+FILES="rna63_project_part2.ipynb used_car_price_predictor.ipynb used_car_price_regression.ipynb streamlit_price_predictor.py README.md requirements.txt"
 
 
 rm -f "$ZIPNAME.zip"
+
+echo "Making directory ${FOLDER}"
+test -d $FOLDER || mkdir $FOLDER
 
 echo "Creating zip at $ZIPNAME.zip"
 for F in $FILES; do
     echo $F
     # add the file to the archive
-    zip $ZIPNAME $F
+    cp $F $FOLDER/
 done
 
-
+# check there is realy a folder before trying to zip it.
+test -d $FOLDER && zip -r $ZIPNAME $FOLDER
