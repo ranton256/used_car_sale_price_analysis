@@ -163,6 +163,37 @@ The deployed cloud app uses model files written to an S3 bucket since they are t
 
 You can use the app at <https://ranton256-used-car-sale-price--streamlit-price-predictor-tt183q.streamlit.app/>
 
+## Challenges
+
+- EDA notebook for cleaning data kept crashing due to dataset size.
+  - Visualizations made it crash, actually data cleaning pretty fast.
+  - Had to disable pair plots for the full dataset.
+- Sparse categorical features
+  - i.e. vehicle model has 29,667 unique values in the dataset.
+  - One hot encoding with decision trees has some drawbacks
+  - Had to use leave one out encoding for getting feature importance for XGBoost so could map back to original columns,but LOO had slightly worse regression performance.
+
+## Summary
+
+Imputation and cleaning of data took significant effort.
+XGBoost performed the best, but also required more preprocessing of features and tuning.
+Linear regression was surprising effective.
+
+The most important features were odometer mileage, model, year, state, and make in that order.
+The final trained model proposed reasonable results in most cases.
+But there are edge cases where it outputs unreasonable values.
+
+## Future Work
+
+Possible future work of interest includes:
+
+- More thorough search of best hyperparameters for XGBoost model
+- Plot map of states color-coded for high/low mean price
+- Faceted histograms of price across different values of each feature column to better visualize the relationship - between each variable and price.
+- Experiment with MLP/neural network based regression model.
+- Use the  CarGurus dataset with the same models and similar features to compare results.
+- Incorporate an NLP model of some kind to include information from the description text of each listing to improve the - price prediction.
+
 ## References
 
 - Chen, T., He, T., Benesty, M., Khotilovich, V., Tang, Y., Cho, H., ... & Zhou, T. (2015). Xgboost: extreme gradient boosting. R package version 0.4-2, 1(4), 1-4.
