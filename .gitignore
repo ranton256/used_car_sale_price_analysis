@@ -7,3 +7,4 @@ oldmodels/
 ~*.pptx
 rna63_DSCI5210_project.zip
 *.pkl
+.venv/
